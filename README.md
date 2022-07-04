@@ -24,7 +24,7 @@ Download the project
   wget https://github.com/naeemmrz/mdm2pred.git
 ```
 
-Unzip and go to the project directory
+Unzip and enter the project directory
 
 ```bash
   unzip mdm2pred-main.zip
@@ -53,7 +53,7 @@ Download the project
   wget https://github.com/naeemmrz/mdm2pred.git
 ```
 
-Unzip and go to the project directory
+Unzip and enter the project directory
 
 ```bash
   unzip mdm2pred-main.zip
