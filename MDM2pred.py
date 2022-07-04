@@ -92,10 +92,10 @@ if user_input is None:
 else:
 	smile = user_input
 	try:
-		#csmi = smi2canon(smile)
-		features = get_m2v(smile)
-		pIC50 = get_prediction(features)
-		IC50_uM = pIC50_2_IC50(pIC50)
+		csmi = smi2canon(smile)
+		features = get_m2v(csmi)
+		#pIC50 = get_prediction(features)
+		#IC50_uM = pIC50_2_IC50(pIC50)
 		
 		# Displaying the result
 		st.write(f"\n")
@@ -109,7 +109,7 @@ else:
 			st.image(input_mol, use_column_width=False, width=450)
 		with col3:
 			st.write("")
-		st.write(f"The predict IC50 for the above compound is **{IC50_uM} μM** (pIC50 = {round(pIC50[0], 3)}).")
+		st.write(f"The predict IC50 for the above compound is **{pIC50_2_IC50(get_prediction(features))} μM** (pIC50 = {round(get_prediction(features)[0], 3)}).")
 		st.write(f"The models benchmarks are:")
 		st.write(LOOResultsReproduce())
 	except:
