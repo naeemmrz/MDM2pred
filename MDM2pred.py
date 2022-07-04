@@ -18,7 +18,7 @@ st.markdown("<div style='text-align: justify;'><strong>MDM2pred</strong> is a ma
 st.write("\n")
 st.write("\n")
 st.subheader("Please enter the SMILE for your compound:")
-user_input = st.text_input("", "CC(=O)NC1=CC=C(C=C1)O")
+user_input = st.text_input("", None)
 
 # Functions for running the backend
 def smile2png(smile):
