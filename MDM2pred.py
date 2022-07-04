@@ -40,6 +40,7 @@ def smi2canon(smile):
 def get_m2v(csmi):
 	import os
 	import pandas as pd
+	os.system(f"wget -c https://raw.githubusercontent.com/samoturk/mol2vec/master/examples/models/model_300dim.pkl")
 	with open('molecule.smi', 'w') as f:
 		f.write(f"{csmi}\tid")
 	os.system('mol2vec featurize -i molecule.smi -o m2v_output.csv -m model_300dim.pkl -r 1 --uncommon UNK')
