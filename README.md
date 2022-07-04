@@ -11,7 +11,7 @@ MDM2pred is a machine learning application based on the KNNRegressor algorithm, 
 
 
 ## Usage
-## [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/naeemmrz/maspa.py/main/MasPA.py)
+## [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://naeemmrz-mdm2pred-mdm2pred-n5xv97.streamlitapp.com)
 - Click on the "Open in Streamlit" badge above. 
 - Enter the SMILE for the compound of your interest.
 - A 2D dipiction of the SMILE and its predicted IC50 will be printed out within few seconds.
