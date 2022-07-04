@@ -14,6 +14,34 @@ MDM2pred is a machine learning application based on the KNNRegressor algorithm, 
 - Enter the SMILE for the compound of your interest.
 - A 2D dipiction of the SMILE and its predicted IC50 will be printed out within few seconds.
   
+## Reproduce the results
+Download the project
+
+```bash
+  wget https://github.com/naeemmrz/mdm2pred.git
+```
+
+Unzip and go to the project directory
+
+```bash
+  unzip mdm2pred-main.zip
+  cd mdm2pred-main
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
+```
+
+run the Reproduce.py
+
+```bash
+  python Reproduce.py
+```
+
+The results will be printed out in the terminal.
+
 ## Run Locally
 Download the project
 
