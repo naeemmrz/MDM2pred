@@ -11,7 +11,7 @@ with col2:
 with col3:
 	st.write("")
 
-st.write("""Developed by **Naeem Abdul Ghafoor¹** & **Ayşegül Yildiz¹** @[Yildiz Neuro Lab](https://ynlab.mu.edu.tr/en)""")
+st.write("""Developed by **Naeem Abdul Ghafoor¹** & **Ayşegül Yildiz¹** @[Yildiz Neuro Lab](http://ynlab.mu.edu.tr/en/mdm2pred-6997)""")
 st.write("""¹Mugla Sitki Kocman University, Faculty of Science, Dept. of Molecular Biology & Genetics, Mugla, Turkey.\n """)
 st.write("\n")
 st.markdown("<div style='text-align: justify;'><strong>MDM2pred</strong> is a machine learning application based on the KNNRegressor algorithm, it's trained on 1647 known inhibitors of the human E3 ubiquitin ligase, the primary negative regulator of the well-known suppressor p53. The KNN model backing MDM2pred achieves ~0.74 R² on test compounds (cross-validated) and has an RMSE of ~0.70 (pIC50 unit), the application takes the SMILE of any compound and predicts its pIC50 against MDM2, returning the result as IC50.</div>", unsafe_allow_html=True)
@@ -60,6 +60,15 @@ def pIC50_2_IC50(pIC50):
 	IC50_uM = round(float(IC50_M) * (10 ** 6), 3)
 	return IC50_uM
 
+def smiles_to_iupac(smile):
+	import requests
+	CACTUS = "https://cactus.nci.nih.gov/chemical/structure/{0}/{1}"
+	rep = "iupac_name"
+	url = CACTUS.format(smile, rep)
+	response = requests.get(url)
+	response.raise_for_status()
+	return response.text
+
 def LOOResultsReproduce():
 	"""
 	Function to reproduce the reported results for the MDM2pred Model 
@@ -92,27 +101,37 @@ if user_input is None:
 else:
 	smile = user_input
 	try:
+		results = []
 		csmi = smi2canon(smile)
 		features = get_m2v(csmi)
 		pIC50 = get_prediction(features)
 		IC50_uM = pIC50_2_IC50(pIC50)
-		# Displaying the result
-		st.write(f"\n")
-		st.write(f"The predict IC50 for the following compound is **{pIC50_2_IC50(get_prediction(get_m2v(smi2canon(smile))))} μM**, pIC50 = {round(get_prediction(get_m2v(smi2canon(smile)))[0], 3)}.")
-		smile2png(smile)
-
-		col1, col2, col3 = st.columns([1,4,1])
-		with col1:
-			st.write("")
-		with col2:
-			input_mol = PIL.Image.open('input.png')
-			st.image(input_mol, use_column_width=False, width=450)
-		with col3:
-			st.write("")
+		results.append(pIC50[0])
+		results.append(IC50_uM)
 		
-		st.write(f"The models benchmarks are:")
-		st.write(LOOResultsReproduce())
 	except:
 		st.write(f"Please enter a valid SMILE :)")
-		
-		
+		st.stop()
+
+# Displaying the result
+st.write(f"\n")
+st.write(f"The predict IC50 for the following compound is **{results[1]} μM** (pIC50 = {round(results[0], 3)}).")
+smile2png(smile)
+
+col1, col2, col3 = st.columns([1,4,1])
+with col1:
+	st.write("")
+with col2:
+	input_mol = PIL.Image.open('input.png')
+	st.image(input_mol, use_column_width=False, width=450)
+with col3:
+	st.write("")
+
+try:
+	smile_name = smiles_to_iupac(smile)
+	st.write(f"Compound IUPAC name: **{smile_name}**")
+except:
+	pass
+
+st.write(f"The models benchmarks are:")
+st.write(LOOResultsReproduce())
