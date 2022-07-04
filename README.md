@@ -3,16 +3,19 @@
 MDM2pred is a machine learning application based on the KNNRegressor algorithm, it's trained on 1647 known inhibitors of the human E3 ubiquitin ligase, the primary negative regulator of the well-known suppressor p53. The KNN model backing MDM2pred achieves ~0.74 R² on test compounds (cross-validated) and has an RMSE of ~0.70 (pIC50 unit), the application takes the SMILE of any compound and predicts its pIC50 against MDM2, returning the result as IC50.
 </div>
 
+
 ## Authors
 **Naeem Abdul Ghafoor¹** & **Ayşegül Yildiz¹** @[Yildiz Neuro Lab](https://ynlab.mu.edu.tr/en)
 ###### ¹Mugla Sitki Kocman University, Faculty of Science, Department of Molecular Biology and Genetics, Mugla, Turkey.
 ###### [Click Here For The Corresponding Article](https://)
+
 
 ## Usage
 ## [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/naeemmrz/maspa.py/main/MasPA.py)
 - Click on the "Open in Streamlit" badge above. 
 - Enter the SMILE for the compound of your interest.
 - A 2D dipiction of the SMILE and its predicted IC50 will be printed out within few seconds.
+  
   
 ## Reproduce the results
 Download the project
@@ -34,13 +37,14 @@ Install dependencies
   pip install -r requirements.txt
 ```
 
-run the Reproduce.py
+Run the Reproduce.py
 
 ```bash
   python Reproduce.py
 ```
 
 The results will be printed out in the terminal.
+
 
 ## Run Locally
 Download the project
