@@ -96,9 +96,9 @@ else:
 		features = get_m2v(csmi)
 		pIC50 = get_prediction(features)
 		IC50_uM = pIC50_2_IC50(pIC50)
-		
 		# Displaying the result
 		st.write(f"\n")
+		st.write(f"The predict IC50 for the following compound is **{pIC50_2_IC50(get_prediction(get_m2v(smi2canon(smile))))} μM**, pIC50 = {round(get_prediction(get_m2v(smi2canon(smile)))[0], 3)}.")
 		smile2png(smile)
 
 		col1, col2, col3 = st.columns([1,4,1])
@@ -109,10 +109,10 @@ else:
 			st.image(input_mol, use_column_width=False, width=450)
 		with col3:
 			st.write("")
-		st.write(f"The predict IC50 for the above compound is **{pIC50_2_IC50(get_prediction(features))} μM** (pIC50 = {round(get_prediction(features)[0], 3)}).")
+		
 		st.write(f"The models benchmarks are:")
 		st.write(LOOResultsReproduce())
 	except:
-		st.write(f"Please enter a valid SMILE :)")	
-
+		st.write(f"Please enter a valid SMILE :)")
+		
 		
