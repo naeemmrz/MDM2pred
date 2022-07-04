@@ -56,7 +56,7 @@ def get_prediction(features):
 
 def pIC50_2_IC50(pIC50):
 	from math import e
-	IC50_M = e ** (-pIC50)
+	IC50_M = e ** (- pIC50)
 	IC50_uM = round(float(IC50_M) * (10 ** 6), 3)
 	return IC50_uM
 
