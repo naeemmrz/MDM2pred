@@ -94,8 +94,8 @@ else:
 	try:
 		csmi = smi2canon(smile)
 		features = get_m2v(csmi)
-		#pIC50 = get_prediction(features)
-		#IC50_uM = pIC50_2_IC50(pIC50)
+		pIC50 = get_prediction(features)
+		IC50_uM = pIC50_2_IC50(pIC50)
 		
 		# Displaying the result
 		st.write(f"\n")
