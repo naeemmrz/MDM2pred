@@ -18,7 +18,7 @@ st.markdown("<div style='text-align: justify;'><strong>MDM2pred</strong> is a ma
 st.write("\n")
 st.write("\n")
 st.subheader("Please enter the SMILE for your compound:")
-user_input = st.text_input("", None)
+user_input = st.text_input("", "CC(=O)NC1=CC=C(C=C1)O")
 
 # Functions for running the backend
 def smile2png(smile):
@@ -92,8 +92,8 @@ if user_input is None:
 else:
 	smile = user_input
 	try:
-		csmi = smi2canon(smile)
-		features = get_m2v(csmi)
+		#csmi = smi2canon(smile)
+		features = get_m2v(smile)
 		pIC50 = get_prediction(features)
 		IC50_uM = pIC50_2_IC50(pIC50)
 		
@@ -110,10 +110,9 @@ else:
 		with col3:
 			st.write("")
 		st.write(f"The predict IC50 for the above compound is **{IC50_uM} μM** (pIC50 = {round(pIC50[0], 3)}).")
-		
+		st.write(f"The models benchmarks are:")
+		st.write(LOOResultsReproduce())
 	except:
 		st.write(f"Please enter a valid SMILE :)")	
 
 		
-st.write(f"The models benchmarks are:")
-st.write(LOOResultsReproduce())
