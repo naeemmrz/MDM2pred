@@ -90,27 +90,26 @@ if user_input is None:
 	st.write(f"Waiting user input")
 else:
 	smile = user_input
-	#try:
-	csmi = smi2canon(smile)
-	features = get_m2v(csmi)
-	pIC50 = get_prediction(features)
-	IC50_uM = pIC50_2_IC50(pIC50)
-	# Displaying the result
-	st.write(f"\n")
-	st.write(f"The predict IC50 for the following compound is **{IC50_uM} μM** (pIC50 = {round(pIC50[0], 3)}).")
-	smile2png(smile)
+	try:
+		csmi = smi2canon(smile)
+		features = get_m2v(csmi)
+		pIC50 = get_prediction(features)
+		IC50_uM = pIC50_2_IC50(pIC50)
+		# Displaying the result
+		st.write(f"\n")
+		st.write(f"The predict IC50 for the following compound is **{IC50_uM} μM** (pIC50 = {round(pIC50[0], 3)}).")
+		smile2png(smile)
 
-	col1, col2, col3 = st.columns([1,4,1])
-	with col1:
-		st.write("")
-	with col2:
-		input_mol = PIL.Image.open('input.png')
-		st.image(input_mol, use_column_width=False, width=450)
-	with col3:
-		st.write("")
-	
-	st.write(f"The models benchmarks are:")
-	st.write(LOOResultsReproduce())
-	#except:
-	#	st.write(f"Please enter a valid SMILE :)")		
-
+		col1, col2, col3 = st.columns([1,4,1])
+		with col1:
+			st.write("")
+		with col2:
+			input_mol = PIL.Image.open('input.png')
+			st.image(input_mol, use_column_width=False, width=450)
+		with col3:
+			st.write("")
+		
+		st.write(f"The models benchmarks are:")
+		st.write(LOOResultsReproduce())
+	except:
+		st.write(f"Please enter a valid SMILE :)")	
