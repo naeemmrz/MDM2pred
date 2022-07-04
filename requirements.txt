@@ -1,0 +1,4 @@
+scikit-learn==0.23.1
+rdkit-pypi==2022.3.2.1
+git+https://github.com/samoturk/mol2vec
+gensim==3.8.2
