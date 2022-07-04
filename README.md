@@ -40,7 +40,8 @@ Start the application
   streamlit run MDM2pred.py
 ```
 
-#### The Application will open in your default browser with the same interface as the online version.
-  
+The Application will open in your default browser with the same interface as the online version.
+
+
 ## Acknowledgements
 The development of MDM2pred was funded by the Research Support and Funding Office (BAP) of Mugla Sitki Kocman University under the project number 22/138/01/3/4.
