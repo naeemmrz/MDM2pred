@@ -7,7 +7,7 @@ with col1:
 	st.write("")
 with col2:
 	image = PIL.Image.open('logo.png')
-	st.image(image, caption='Cartoon representation of MDM2 from PDB 6I3S', use_column_width=False, width=500)
+	st.image(image, caption='Cartoon representation of MDM2 from PDB ID: 6I3S', use_column_width=False, width=500)
 with col3:
 	st.write("")
 
