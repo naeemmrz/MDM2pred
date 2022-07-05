@@ -14,7 +14,7 @@ with col3:
 st.write("""Developed by **Naeem Abdul Ghafoor¹** & **Ayşegül Yildiz¹** @[Yildiz Neuro Lab](http://ynlab.mu.edu.tr/en/mdm2pred-6997)""")
 st.write("""¹Mugla Sitki Kocman University, Faculty of Science, Dept. of Molecular Biology & Genetics, Mugla, Turkey.\n """)
 st.write("\n")
-st.markdown("<div style='text-align: justify;'><strong>MDM2pred</strong> is a machine learning application based on the KNNRegressor algorithm, it's trained on 1647 known inhibitors of the human E3 ubiquitin ligase, the primary negative regulator of the well-known suppressor p53. The KNN model backing MDM2pred achieves ~0.74 R² on test compounds (cross-validated) and has an RMSE of ~0.70 (pIC50 unit), the application takes the SMILE of any compound and predicts its pIC50 against MDM2, returning the result as IC50.</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: justify;'><strong>MDM2pred</strong> is a machine learning application based on the KNNRegressor algorithm, it's trained on 1647 known inhibitors of the human E3 ubiquitin ligase (Mouse Double Minute 2; MDM2), the primary negative regulator of the well-known tumor suppressor p53. The KNN model backing MDM2pred achieves ~0.74 R² on test compounds (cross-validated) and has an RMSE of ~0.70 (pIC50 unit), the application takes the SMILE of any compound and predicts its pIC50 against MDM2, returning the result as IC50.</div>", unsafe_allow_html=True)
 st.write("\n")
 st.write("\n")
 st.subheader("Please enter the SMILE for your compound:")
