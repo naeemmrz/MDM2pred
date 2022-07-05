@@ -1,4 +1,7 @@
 # MDM2pred
+
+![Logo](https://github.com/naeemmrz/mdm2pred/blob/main/logo.png?raw=true)
+
 <div style="text-align: justify"> 
 MDM2pred is a machine learning application based on the KNNRegressor algorithm, it's trained on 1647 known inhibitors of the human E3 ubiquitin ligase, the primary negative regulator of the well-known suppressor p53. The KNN model backing MDM2pred achieves ~0.74 R² on test compounds (cross-validated) and has an RMSE of ~0.70 (pIC50 unit), the application takes the SMILE of any compound and predicts its pIC50 against MDM2, returning the result as IC50.
 </div>
