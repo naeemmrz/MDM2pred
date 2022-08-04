@@ -1,6 +1,14 @@
 # Streamlit functions for frontend and input parsing
-import streamlit as st
+import os
 import PIL
+import glob
+import pickle
+from math import e
+import pandas as pd
+import streamlit as st
+from rdkit import Chem
+from rdkit.Chem.Draw import rdMolDraw2D
+
 
 col1, col2, col3 = st.columns([1,4,1])
 with col1:
@@ -17,49 +25,53 @@ st.write("\n")
 st.markdown("<div style='text-align: justify;'><strong>MDM2pred</strong> is a machine learning application based on the KNNRegressor algorithm, it's trained on 1647 known inhibitors of the human E3 ubiquitin ligase (Mouse Double Minute 2; MDM2), the primary negative regulator of the well-known tumor suppressor p53. The KNN model backing MDM2pred achieves ~0.74 R² on test compounds (cross-validated) and has an RMSE of ~0.70 (pIC50 unit), the application takes the SMILE of any compound and predicts its pIC50 against MDM2, returning the result as IC50.</div>", unsafe_allow_html=True)
 st.write("\n")
 st.write("\n")
+
+
+# Processeing input and generating the results
 st.subheader("Please enter the SMILE for your compound:")
 user_input = st.text_input("", "CC(=O)NC1=CC=C(C=C1)O")
 
-# Functions for running the backend
+## Input Control
+if user_input is None:
+	st.write(f"Waiting user input")
+else:
+	smile = user_input
+
+## Input Conversion
+try:
+	m = Chem.MolFromSmiles(smile)
+	csmi = Chem.rdmolfiles.MolToSmiles(m)
+except:
+	st.write(f"Please provide a valid SMILE")
+	st.stop()
+	
+## Input Featurization
+model_300dim = glob.glob(f"*model_300dim.pkl")
+if len(model_300dim) == 0:
+	os.system(f"curl -O https://raw.githubusercontent.com/samoturk/mol2vec/master/examples/models/model_300dim.pkl")
+else:
+	pass
+with open('molecule.smi', 'w') as f:
+	f.write(f"{csmi}\tid")
+os.system('mol2vec featurize -i molecule.smi -o m2v_output.csv -m model_300dim.pkl -r 1 --uncommon UNK')
+_ = pd.read_csv('m2v_output.csv')
+features = _.drop(['Unnamed: 0', 'Smiles', 'ID'], axis=1)
+	
+## Prediction pIC50 and IC50 conversion
+MDM2_KNN = pickle.load(open('MDM2_M2V_KNN_UP.sav', 'rb'))
+pIC50 = round(MDM2_KNN.predict(features)[0], 3)
+IC50_M = e ** (- pIC50)
+IC50_uM = round(float(IC50_M) * (10 ** 6), 3)
+
+## Compound image and name
 def smile2png(smile):
-	from rdkit import Chem
-	from rdkit.Chem.Draw import rdMolDraw2D
 	smi = Chem.MolFromSmiles(f'{smile}')
 	d = rdMolDraw2D.MolDraw2DCairo(1500, 1500)
 	d.DrawMolecule(smi)
 	d.FinishDrawing()
 	d.WriteDrawingText("input.png")
 	return
-
-def smi2canon(smile):
-	from rdkit import Chem
-	m = Chem.MolFromSmiles(smile)
-	csmi = Chem.rdmolfiles.MolToSmiles(m)
-	return csmi
-
-def get_m2v(csmi):
-	import os
-	import pandas as pd
-	os.system(f"curl -O https://raw.githubusercontent.com/samoturk/mol2vec/master/examples/models/model_300dim.pkl")
-	with open('molecule.smi', 'w') as f:
-		f.write(f"{csmi}\tid")
-	os.system('mol2vec featurize -i molecule.smi -o m2v_output.csv -m model_300dim.pkl -r 1 --uncommon UNK')
-	_ = pd.read_csv('m2v_output.csv')
-	features = _.drop(['Unnamed: 0', 'Smiles', 'ID'], axis=1)
-	return features
-
-def get_prediction(features):
-	import pickle
-	MDM2_KNN = pickle.load(open('MDM2_M2V_KNN.sav', 'rb'))
-	prediction = MDM2_KNN.predict(features)
-	return prediction
-
-def pIC50_2_IC50(pIC50):
-	from math import e
-	IC50_M = e ** (- pIC50)
-	IC50_uM = round(float(IC50_M) * (10 ** 6), 3)
-	return IC50_uM
-
+smile2png(smile)
 def smiles_to_iupac(smile):
 	import requests
 	CACTUS = "https://cactus.nci.nih.gov/chemical/structure/{0}/{1}"
@@ -68,55 +80,12 @@ def smiles_to_iupac(smile):
 	response = requests.get(url)
 	response.raise_for_status()
 	return response.text
-
-def LOOResultsReproduce():
-	"""
-	Function to reproduce the reported results for the MDM2pred Model 
-	"""
-	import pickle
-	import pandas as pd
-	from sklearn.model_selection import KFold, cross_val_score
-
-	def average(lst):
-		return sum(lst) / len(lst)
-	KNN_Model = pickle.load(open('MDM2_M2V_KNN.sav', 'rb'))
-	X = pd.read_csv('MDM2_M2VX.csv')
-	y = pd.read_csv('MDM2.csv')['pIC50']
-
-	cv = KFold(n_splits=10, shuffle=True, random_state=48)
-	R2 = cross_val_score(KNN_Model, X, y, scoring='r2', cv=cv, n_jobs=None)      
-	RMSE = cross_val_score(KNN_Model, X, y, scoring='neg_root_mean_squared_error', cv=cv, n_jobs=None) * -1
-	MSE = cross_val_score(KNN_Model, X, y, scoring='neg_mean_squared_error', cv=cv, n_jobs=None) * -1
-	MAE = cross_val_score(KNN_Model, X, y, scoring='neg_mean_absolute_error', cv=cv, n_jobs=None) * -1
-	
-	results = {'Number of Compounds': X.shape[0], 'LOOCV R2': average(R2), 'LOOCV RMSE': average(RMSE),
-	 'LOOCV MSE': average(MSE), 'LOOCV MAE': average(MAE)}
-	df = pd.DataFrame(results, index=[0])
-	return df
-
-
-# Processeing input and generating the results
-if user_input is None:
-	st.write(f"Waiting user input")
-else:
-	smile = user_input
-	try:
-		results = []
-		csmi = smi2canon(smile)
-		features = get_m2v(csmi)
-		pIC50 = get_prediction(features)
-		IC50_uM = pIC50_2_IC50(pIC50)
-		results.append(pIC50[0])
-		results.append(IC50_uM)
-		
-	except:
-		st.write(f"Please enter a valid SMILE :)")
-		st.stop()
+smile_name = smiles_to_iupac(smile)
 
 # Displaying the result
 st.write(f"\n")
-st.write(f"The predict IC50 for the following compound is **{results[1]} μM** (pIC50 = {round(results[0], 3)}).")
-smile2png(smile)
+st.write(f"The predict IC50 for the following compound is **{IC50_uM} μM** (pIC50 = {pIC50}).")
+
 
 col1, col2, col3 = st.columns([1,4,1])
 with col1:
@@ -134,4 +103,5 @@ except:
 	pass
 
 st.write(f"The models benchmarks are:")
-st.write(LOOResultsReproduce())
+results = pd.read_csv('MDM2_M2V_KNN_UP_CV10_Results.tsv', sep='\t')
+results
