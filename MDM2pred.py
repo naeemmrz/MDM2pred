@@ -58,7 +58,7 @@ _ = pd.read_csv('m2v_output.csv')
 features = _.drop(['Unnamed: 0', 'Smiles', 'ID'], axis=1)
 	
 ## Prediction pIC50 and IC50 conversion
-MDM2_KNN = pickle.load(open('MDM2_M2V_KNN_UP.sav', 'rb'))
+MDM2_KNN = pickle.load(open('MDM2_M2V_KNN.sav', 'rb'))
 pIC50 = round(MDM2_KNN.predict(features)[0], 3)
 IC50_M = e ** (- pIC50)
 IC50_uM = round(float(IC50_M) * (10 ** 6), 3)
