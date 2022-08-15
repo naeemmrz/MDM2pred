@@ -80,8 +80,10 @@ def smiles_to_iupac(smile):
 	response = requests.get(url)
 	response.raise_for_status()
 	return response.text
-smile_name = smiles_to_iupac(smile)
-
+try:
+	smile_name = smiles_to_iupac(smile)
+except:
+	pass
 # Displaying the result
 st.write(f"\n")
 st.write(f"The predict IC50 for the following compound is **{IC50_uM} μM** (pIC50 = {pIC50}).")
