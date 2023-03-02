@@ -60,8 +60,8 @@ features = _.drop(['Unnamed: 0', 'Smiles', 'ID'], axis=1)
 ## Prediction pIC50 and IC50 conversion
 MDM2_KNN = pickle.load(open('MDM2_M2V_KNN.sav', 'rb'))
 pIC50 = round(MDM2_KNN.predict(features)[0], 3)
-IC50_M = e ** (- pIC50)
-IC50_uM = round(float(IC50_M) * (10 ** 6), 3)
+IC50_M = 10 ** (- pIC50)
+IC50_uM = round(float(IC50_M) * (10 ** 9), 3)
 
 ## Compound image and name
 def smile2png(smile):
@@ -86,7 +86,7 @@ except:
 	pass
 # Displaying the result
 st.write(f"\n")
-st.write(f"The predict IC50 for the following compound is **{IC50_uM} μM** (pIC50 = {pIC50}).")
+st.write(f"The predict IC50 for the following compound is **{IC50_uM} nM** (pIC50 = {pIC50}).")
 
 
 col1, col2, col3 = st.columns([1,4,1])
