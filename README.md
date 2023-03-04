@@ -8,16 +8,18 @@ MDM2pred is a machine learning application based on the KNNRegressor algorithm, 
 
 
 ## Authors
-**Naeem Abdul Ghafoor¹** & **Ayşegül Yildiz¹** @[Yildiz Neuro Lab](https://ynlab.mu.edu.tr/en)
-###### ¹Mugla Sitki Kocman University, Faculty of Science, Department of Molecular Biology and Genetics, Mugla, Turkey.
+**Naeem Abdul Ghafoor¹²** & **Ayşegül Yildiz²³** @[Yildiz Neuro Lab](https://ynlab.mu.edu.tr/en)
+###### ¹UnivLyon, Université Claude Bernard Lyon 1, 69100 Villeurbanne, France
+###### ²Department of Molecular Biology and Genetics, Graduate School of Natural and Applied Sciences, Mugla Sitki Kocman University, 48000 Mugla, Turkey
+###### ³Department of Molecular Biology and Genetics, Faculty of Science, Mugla Sitki Kocman University, Mugla, Turkey.
 ###### [Click Here For The Corresponding Article](https://)
 
 
 ## Usage
 ## [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ynlab-mdm2pred.streamlit.app/)
 - Click on the "Open in Streamlit" badge above. 
-- Enter the SMILE for the compound of your interest.
-- A 2D depiction of the SMILE and its predicted IC50 will be printed out within a few seconds.
+- Enter the SMILES for the compound of your interest.
+- A 2D depiction of the SMILES and its predicted IC50 will be printed out within a few seconds.
   
   
 ## Reproduce the results
