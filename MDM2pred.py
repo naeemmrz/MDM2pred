@@ -19,7 +19,7 @@ with col2:
 with col3:
 	st.write("")
 
-st.write("""Developed by **Naeem Abdul Ghafoor¹²* @[Yildiz Neuro Lab](http://ynlab.mu.edu.tr/en/mdm2pred-6997)""")
+st.write("""Developed by **Naeem Abdul Ghafoor¹²** @[Yildiz Neuro Lab](http://ynlab.mu.edu.tr/en/mdm2pred-6997)""")
 st.write("""¹Department of Molecular Biology and Genetics, Graduate School of Natural and Applied Sciences, Mugla Sitki Kocman University, 48000 Mugla, Turkey.\n """)
 st.write("""²UnivLyon, Université Claude Bernard Lyon 1, 69100 Villeurbanne, France.\n """)
 st.write("\n")
