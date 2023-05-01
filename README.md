@@ -23,7 +23,7 @@ MDM2pred is a powerful machine learning tool for predicting the inhibitory poten
 - Use this information to gain valuable insights into the inhibitory potential of your compound and accelerate your drug development efforts.
   
   
-## To reproduce the results
+## To reproduce the results (Not available at the moment)
 Download the project
 
 ```bash
