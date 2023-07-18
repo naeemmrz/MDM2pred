@@ -1,4 +1,4 @@
-lazypredict==0.2.12
+scikit-learn==1.2.2
 rdkit-pypi==2022.3.3
 streamlit==1.24.1
 mol2vec @ git+https://github.com/samoturk/mol2vec@850d944d5f48a58e26ed0264332b5741f72555aa
