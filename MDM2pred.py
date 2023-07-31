@@ -106,5 +106,5 @@ except:
 	pass
 
 st.write(f"The models benchmarks are:")
-results = pd.read_csv('MDM2_M2V_KNN_UP_CV10_Results.tsv', sep='\t')
+results = pd.read_csv('MDM2_M2V_KNN_UP_CV10_Results.tsv', sep=';')
 results
