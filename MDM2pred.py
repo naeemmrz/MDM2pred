@@ -19,9 +19,8 @@ with col2:
 with col3:
 	st.write("")
 
-st.write("""Developed by **Naeem Abdul Ghafoor¹²** @[Yildiz Neuro Lab](http://ynlab.mu.edu.tr/en/mdm2pred-6997)""")
+st.write("""Developed by **Naeem Abdul Ghafoor¹** @[Yildiz Neuro Lab](http://ynlab.mu.edu.tr/en/mdm2pred-6997)""")
 st.write("""¹Department of Molecular Biology and Genetics, Graduate School of Natural and Applied Sciences, Mugla Sitki Kocman University, 48000 Mugla, Turkey.\n """)
-st.write("""²UnivLyon, Université Claude Bernard Lyon 1, 69100 Villeurbanne, France.\n """)
 st.write("\n")
 st.markdown("<div style='text-align: justify;'><strong>MDM2pred</strong> is a powerful machine learning tool for predicting the inhibitory potency of compounds against the human E3 ubiquitin ligase MDM2, a key regulator of the tumor suppressor p53. Based on the KNeighbors Regressor algorithm, MDM2pred has been trained on a comprehensive dataset of 1647 known MDM2 inhibitors, achieving an impressive R² value of ~0.74 and an RMSE of ~0.70 (in pIC50 units) over a 10-fold cross-validation. By simply inputting the SMILE notation of any compound, MDM2pred  predicts its pIC50 value against MDM2 and returns the result as IC50. MDM2pred can be a valuable resource for researchers and drug developers looking to accelerate their early screening steps.</div>", unsafe_allow_html=True)
 st.write("\n")
