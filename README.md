@@ -8,9 +8,8 @@ MDM2pred is a powerful machine learning tool for predicting the inhibitory poten
 
 
 ## Authors
-**Naeem Abdul Ghafoor¹²** & **Ayşegül Yildiz¹²** @[Yildiz Neuro Lab](https://ynlab.mu.edu.tr/en)
+**Naeem Abdul Ghafoor¹** & **Ayşegül Yildiz¹²** @[Yildiz Neuro Lab](https://ynlab.mu.edu.tr/en)
 ###### ¹Department of Molecular Biology and Genetics, Graduate School of Natural and Applied Sciences, Mugla Sitki Kocman University, 48000 Mugla, Turkey
-###### ²UnivLyon, Université Claude Bernard Lyon 1, 69100 Villeurbanne, France
 ###### ³Department of Molecular Biology and Genetics, Faculty of Science, Mugla Sitki Kocman University, Mugla, Turkey.
 ###### [Click Here For The Corresponding Article](https://)
 
